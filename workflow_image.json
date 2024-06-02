@@ -1,0 +1,226 @@
+{
+  "4": {
+    "inputs": {
+      "text": [
+        "27",
+        1
+      ],
+      "IF_DisplayText_0": "very beautiful,(8k, best quality, masterpiece, Enchanting scene: A serene beauty, with silky white hair cascading down her back, stands alone amidst a sea of golden wheat fields under the soft glow of a blue moon. The gentle breeze whispers secrets through the tall grasses as she gazes out into the distance, lost in thought. Her ethereal presence is illuminated by the lunar light, casting an otherworldly ambiance across the landscape. View from behind, capturing her captivating silhouette against the starry night sky.system Best quality, masterpiece, Epic, cover-art,"
+    },
+    "class_type": "IF_DisplayText",
+    "_meta": {
+      "title": "IF Display Text📟"
+    }
+  },
+  "5": {
+    "inputs": {
+      "text": [
+        "27",
+        2
+      ],
+      "IF_DisplayText_1": "hand,NSFW,nude,naked,nipples,chibi, child,worst quality, low quality, lowres,bad proportions,missing arms,fused fingers,unclear eyes,missing fingers,out of frame,signature,logo,text,letters,username"
+    },
+    "class_type": "IF_DisplayText",
+    "_meta": {
+      "title": "IF Display Text📟"
+    }
+  },
+  "7": {
+    "inputs": {
+      "ckpt_name": "Counterfeit-V3.0_fix_fp16.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "Load Checkpoint"
+    }
+  },
+  "8": {
+    "inputs": {
+      "seed": 418402549691981,
+      "steps": 45,
+      "cfg": 10,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 1,
+      "model": [
+        "7",
+        0
+      ],
+      "positive": [
+        "9",
+        0
+      ],
+      "negative": [
+        "10",
+        0
+      ],
+      "latent_image": [
+        "11",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "9": {
+    "inputs": {
+      "text": [
+        "4",
+        0
+      ],
+      "clip": [
+        "21",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "10": {
+    "inputs": {
+      "text": [
+        "5",
+        0
+      ],
+      "clip": [
+        "21",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "11": {
+    "inputs": {
+      "width": 512,
+      "height": 768,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "Empty Latent Image"
+    }
+  },
+  "15": {
+    "inputs": {
+      "upscale_method": "nearest-exact",
+      "scale_by": 2,
+      "samples": [
+        "8",
+        0
+      ]
+    },
+    "class_type": "LatentUpscaleBy",
+    "_meta": {
+      "title": "Upscale Latent By"
+    }
+  },
+  "16": {
+    "inputs": {
+      "seed": 290562004669706,
+      "steps": 20,
+      "cfg": 7,
+      "sampler_name": "euler_ancestral",
+      "scheduler": "normal",
+      "denoise": 0.55,
+      "model": [
+        "7",
+        0
+      ],
+      "positive": [
+        "9",
+        0
+      ],
+      "negative": [
+        "10",
+        0
+      ],
+      "latent_image": [
+        "15",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "17": {
+    "inputs": {
+      "samples": [
+        "16",
+        0
+      ],
+      "vae": [
+        "7",
+        2
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "21": {
+    "inputs": {
+      "stop_at_clip_layer": -2,
+      "clip": [
+        "7",
+        1
+      ]
+    },
+    "class_type": "CLIPSetLastLayer",
+    "_meta": {
+      "title": "CLIP Set Last Layer"
+    }
+  },
+  "27": {
+    "inputs": {
+      "prompt": "",
+      "base_ip": "localhost",
+      "port": "11434",
+      "engine": "ollama",
+      "selected_model": "impactframes/llama3_ifai_sd_prompt_mkr_q4km:latest",
+      "assistant": "IF_PromptMKR",
+      "max_tokens": 2048,
+      "temperature": 0.7000000000000001,
+      "top_k": 40,
+      "top_p": 0.2,
+      "repeat_penalty": 1.1,
+      "stop": "<|end_of_text|>",
+      "seed": 1071807603150238,
+      "random": false,
+      "embellish_prompt": "Beautiful",
+      "style_prompt": "Anime",
+      "neg_prompt": "Simple_negative",
+      "clear_history": true,
+      "history_steps": 10,
+      "keep_alive": false,
+      "text_cleanup": true,
+      "mode": true
+    },
+    "class_type": "IF_ChatPrompt",
+    "_meta": {
+      "title": "IF Chat Prompt👨‍💻"
+    }
+  },
+  "31": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "images": [
+        "17",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  }
+}

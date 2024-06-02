@@ -1,0 +1,335 @@
+{
+  "53": {
+    "inputs": {
+      "frame_rate": 12,
+      "loop_count": 0,
+      "filename_prefix": "2024-05-31/previews/AD",
+      "format": "video/h264-mp4",
+      "pix_fmt": "yuv420p",
+      "crf": 5,
+      "save_metadata": true,
+      "pingpong": false,
+      "save_output": true,
+      "images": [
+        "84",
+        0
+      ]
+    },
+    "class_type": "VHS_VideoCombine",
+    "_meta": {
+      "title": "Video Combine 🎥🅥🅗🅢"
+    }
+  },
+  "77": {
+    "inputs": {
+      "beta_schedule": "sqrt_linear (AnimateDiff)",
+      "model": [
+        "563",
+        0
+      ],
+      "m_models": [
+        "79",
+        0
+      ],
+      "context_options": [
+        "156",
+        0
+      ]
+    },
+    "class_type": "ADE_UseEvolvedSampling",
+    "_meta": {
+      "title": "Use Evolved Sampling 🎭🅐🅓②"
+    }
+  },
+  "79": {
+    "inputs": {
+      "motion_model": [
+        "87",
+        0
+      ],
+      "scale_multival": [
+        "256",
+        0
+      ]
+    },
+    "class_type": "ADE_ApplyAnimateDiffModelSimple",
+    "_meta": {
+      "title": "Apply AnimateDiff Model 🎭🅐🅓②"
+    }
+  },
+  "80": {
+    "inputs": {
+      "seed": 724261070986580,
+      "steps": 20,
+      "cfg": 1,
+      "sampler_name": "lcm",
+      "scheduler": "sgm_uniform",
+      "denoise": 1,
+      "model": [
+        "682",
+        0
+      ],
+      "positive": [
+        "125",
+        0
+      ],
+      "negative": [
+        "125",
+        1
+      ],
+      "latent_image": [
+        "134",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "84": {
+    "inputs": {
+      "samples": [
+        "80",
+        0
+      ],
+      "vae": [
+        "85",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "85": {
+    "inputs": {
+      "vae_name": "vae-ft-mse-840000-ema-pruned.ckpt"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "Load VAE"
+    }
+  },
+  "87": {
+    "inputs": {
+      "model_name": "AnimateLCM_sd15_t2v.ckpt"
+    },
+    "class_type": "ADE_LoadAnimateDiffModel",
+    "_meta": {
+      "title": "Load AnimateDiff Model 🎭🅐🅓②"
+    }
+  },
+  "125": {
+    "inputs": {
+      "strength": 0.3,
+      "start_percent": 0,
+      "end_percent": 0.34,
+      "positive": [
+        "565",
+        0
+      ],
+      "negative": [
+        "566",
+        0
+      ],
+      "control_net": [
+        "127",
+        0
+      ],
+      "image": [
+        "458",
+        0
+      ]
+    },
+    "class_type": "ACN_AdvancedControlNetApply",
+    "_meta": {
+      "title": "Apply Advanced ControlNet 🛂🅐🅒🅝"
+    }
+  },
+  "127": {
+    "inputs": {
+      "control_net_name": "control_v1p_sd15_qrcode_monster.safetensors"
+    },
+    "class_type": "ControlNetLoaderAdvanced",
+    "_meta": {
+      "title": "Load Advanced ControlNet Model 🛂🅐🅒🅝"
+    }
+  },
+  "134": {
+    "inputs": {
+      "width": 288,
+      "height": 512,
+      "batch_size": 96
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "Empty Latent Image"
+    }
+  },
+  "156": {
+    "inputs": {
+      "context_length": 16,
+      "context_stride": 1,
+      "context_overlap": 2,
+      "closed_loop": false,
+      "fuse_method": "pyramid",
+      "use_on_equal_length": false,
+      "start_percent": 0,
+      "guarantee_steps": 1
+    },
+    "class_type": "ADE_LoopedUniformContextOptions",
+    "_meta": {
+      "title": "Context Options◆Looped Uniform 🎭🅐🅓"
+    }
+  },
+  "256": {
+    "inputs": {
+      "float_val": 1.2
+    },
+    "class_type": "ADE_MultivalDynamic",
+    "_meta": {
+      "title": "Motion Scale 🎭🅐🅓"
+    }
+  },
+  "454": {
+    "inputs": {
+      "amount": [
+        "461",
+        0
+      ],
+      "image": [
+        "568",
+        0
+      ]
+    },
+    "class_type": "RepeatImageBatch",
+    "_meta": {
+      "title": "RepeatImageBatch"
+    }
+  },
+  "458": {
+    "inputs": {
+      "split_index": [
+        "569",
+        0
+      ],
+      "images": [
+        "454",
+        0
+      ]
+    },
+    "class_type": "VHS_SplitImages",
+    "_meta": {
+      "title": "Split Image Batch 🎥🅥🅗🅢"
+    }
+  },
+  "461": {
+    "inputs": {
+      "value": "a/b",
+      "a": [
+        "569",
+        0
+      ],
+      "b": [
+        "568",
+        1
+      ]
+    },
+    "class_type": "SimpleMath+",
+    "_meta": {
+      "title": "🔧 Simple Math"
+    }
+  },
+  "563": {
+    "inputs": {
+      "lora_name": "AnimateLCM_sd15_t2v_lora.safetensors",
+      "strength_model": 1,
+      "model": [
+        "564",
+        0
+      ]
+    },
+    "class_type": "LoraLoaderModelOnly",
+    "_meta": {
+      "title": "LoraLoaderModelOnly"
+    }
+  },
+  "564": {
+    "inputs": {
+      "ckpt_name": "Counterfeit-V3.0_fix_fp16.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "Load Checkpoint"
+    }
+  },
+  "565": {
+    "inputs": {
+      "text": "",
+      "clip": [
+        "564",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "Positive"
+    }
+  },
+  "566": {
+    "inputs": {
+      "text": "",
+      "clip": [
+        "564",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "Negative"
+    }
+  },
+  "568": {
+    "inputs": {
+      "video": "https://i.imgur.com/FZojh3v.mp4",
+      "force_rate": 12,
+      "force_size": "Disabled",
+      "custom_width": 512,
+      "custom_height": 512,
+      "frame_load_cap": 0,
+      "skip_first_frames": 0,
+      "select_every_nth": 1
+    },
+    "class_type": "VHS_LoadVideoPath",
+    "_meta": {
+      "title": "Load Video (Path) 🎥🅥🅗🅢"
+    }
+  },
+  "569": {
+    "inputs": {
+      "batch": [
+        "134",
+        0
+      ]
+    },
+    "class_type": "BatchCount+",
+    "_meta": {
+      "title": "🔧 Batch Count"
+    }
+  },
+  "573": {
+    "inputs": {
+      "preset": "PLUS (high strength)",
+      "model": [
+        "77",
+        0
+      ]
+    },
+    "class_type": "IPAdapterUnifiedLoader",
+    "_meta": {
+      "title": "IPAdapter Unified Loader"
+    }
+  }
+
