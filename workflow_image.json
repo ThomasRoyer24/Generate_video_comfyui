@@ -5,20 +5,7 @@
         "27",
         1
       ],
-      "IF_DisplayText_0": "very beautiful,(8k, best quality, masterpiece, Enchanting scene: A serene beauty, with silky white hair cascading down her back, stands alone amidst a sea of golden wheat fields under the soft glow of a blue moon. The gentle breeze whispers secrets through the tall grasses as she gazes out into the distance, lost in thought. Her ethereal presence is illuminated by the lunar light, casting an otherworldly ambiance across the landscape. View from behind, capturing her captivating silhouette against the starry night sky.system Best quality, masterpiece, Epic, cover-art,"
-    },
-    "class_type": "IF_DisplayText",
-    "_meta": {
-      "title": "IF Display Text📟"
-    }
-  },
-  "5": {
-    "inputs": {
-      "text": [
-        "27",
-        2
-      ],
-      "IF_DisplayText_1": "hand,NSFW,nude,naked,nipples,chibi, child,worst quality, low quality, lowres,bad proportions,missing arms,fused fingers,unclear eyes,missing fingers,out of frame,signature,logo,text,letters,username"
+      "IF_DisplayText_0": "very beautiful,(8k, best quality, masterpiece, 1. Young girl with long curly hair and bright smile, walking alone through serene park scenery, soft sunlight filtering through trees, medium shot Manga, Japanese, vibrant, expressive, character-focused,"
     },
     "class_type": "IF_DisplayText",
     "_meta": {
@@ -36,7 +23,7 @@
   },
   "8": {
     "inputs": {
-      "seed": 418402549691981,
+      "seed": 561819194523214,
       "steps": 45,
       "cfg": 10,
       "sampler_name": "dpmpp_2m",
@@ -47,11 +34,11 @@
         0
       ],
       "positive": [
-        "9",
+        "44",
         0
       ],
       "negative": [
-        "10",
+        "43",
         0
       ],
       "latent_image": [
@@ -62,38 +49,6 @@
     "class_type": "KSampler",
     "_meta": {
       "title": "KSampler"
-    }
-  },
-  "9": {
-    "inputs": {
-      "text": [
-        "4",
-        0
-      ],
-      "clip": [
-        "21",
-        0
-      ]
-    },
-    "class_type": "CLIPTextEncode",
-    "_meta": {
-      "title": "CLIP Text Encode (Prompt)"
-    }
-  },
-  "10": {
-    "inputs": {
-      "text": [
-        "5",
-        0
-      ],
-      "clip": [
-        "21",
-        0
-      ]
-    },
-    "class_type": "CLIPTextEncode",
-    "_meta": {
-      "title": "CLIP Text Encode (Prompt)"
     }
   },
   "11": {
@@ -123,7 +78,7 @@
   },
   "16": {
     "inputs": {
-      "seed": 290562004669706,
+      "seed": 220086869372175,
       "steps": 20,
       "cfg": 7,
       "sampler_name": "euler_ancestral",
@@ -134,11 +89,11 @@
         0
       ],
       "positive": [
-        "9",
+        "44",
         0
       ],
       "negative": [
-        "10",
+        "43",
         0
       ],
       "latent_image": [
@@ -187,14 +142,14 @@
       "port": "11434",
       "engine": "ollama",
       "selected_model": "impactframes/llama3_ifai_sd_prompt_mkr_q4km:latest",
-      "assistant": "IF_PromptMKR",
+      "assistant": "Lyricrafter",
       "max_tokens": 2048,
       "temperature": 0.7000000000000001,
       "top_k": 40,
       "top_p": 0.2,
       "repeat_penalty": 1.1,
       "stop": "<|end_of_text|>",
-      "seed": 1071807603150238,
+      "seed": 589464754313833,
       "random": false,
       "embellish_prompt": "Beautiful",
       "style_prompt": "Anime",
@@ -221,6 +176,35 @@
     "class_type": "SaveImage",
     "_meta": {
       "title": "Save Image"
+    }
+  },
+  "43": {
+    "inputs": {
+      "text": "(embedding:EasyNegativeV2:1),hand,NSFW,nude,naked,nipples,chibi, child,worst quality, low quality, lowres,bad proportions,missing arms,fused fingers,unclear eyes,missing fingers,out of frame,signature,logo,text,letters,username",
+      "clip": [
+        "21",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "44": {
+    "inputs": {
+      "text": [
+        "4",
+        0
+      ],
+      "clip": [
+        "21",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
     }
   }
 }

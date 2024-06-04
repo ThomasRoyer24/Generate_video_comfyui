@@ -34,8 +34,6 @@ def open_ai():
 
     
     if response.status_code == 200:
-    #    print("Response from OpenAI:", response.json())
-    #    print('\n')
 
         data = response.json()['choices'][0]['message']['content']
         data = json.loads(data)
@@ -54,3 +52,4 @@ def open_ai():
 
 def extract_values(image):
     return ', '.join(image.values())
+

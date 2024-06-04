@@ -74,7 +74,7 @@ def generate_video(image_link,user_name,time_interval_img):
 
     for i, link in enumerate(image_link):
     #Load image
-        comfy_json[str(20+i)]['inputs']['image'] = "D:/ComfyUi/ComfyUI_windows_portable/ComfyUI/output/"+user_name+"/"+link+".png"
+        comfy_json[str(20+i)]['inputs']['image'] = "D:/ComfyUi/ComfyUI_windows_portable/ComfyUI/output/"+user_name+"/"+link
        
     #Create Mask
         comfy_json[str(10+i)]['inputs']['frames'] = total_frame #12 frame/sec
@@ -116,7 +116,6 @@ def generate_video(image_link,user_name,time_interval_img):
     ws = websocket.WebSocket()
     ws.connect("ws://{}/ws?clientId={}".format(server_address, client_id))
     video_link = get_video(ws, comfy_json)
-    print(video_link)
     return video_link
     
         
@@ -124,4 +123,4 @@ def generate_video(image_link,user_name,time_interval_img):
 
   
 
-#generate_video(["ComfyUI_00006_"],"test",2)
+#generate_video(["ComfyUI_00006_.png","ComfyUI_00023_.png"],"test",2)

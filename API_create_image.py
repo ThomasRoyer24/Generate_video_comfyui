@@ -25,7 +25,6 @@ def queue_prompt(prompt):
 
 def get_images(ws, prompt):
     prompt_id = queue_prompt(prompt)['prompt_id']
-    output_images = {}
     while True:
         out = ws.recv()
         if isinstance(out, str):
@@ -59,9 +58,8 @@ def generate_image(prompt,user_name):
     comfy_json['8']['inputs']['seed'] = random.randint(1, 999999999999)
     comfy_json['16']['inputs']['seed'] = random.randint(1, 999999999999)
 
-    print(comfy_json)
-    timestamp = time.time()
-    #comfy_json['']['filename_prefix'] = str(user_name)+"/"+ str(timestamp)+"/"+"Comfyui"
+    #timestamp = time.time()
+    comfy_json['31']['inputs']['filename_prefix'] = user_name+"/"+"Comfyui"
 
     ws = websocket.WebSocket()
     ws.connect("ws://{}/ws?clientId={}".format(server_address, client_id))
