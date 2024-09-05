@@ -1,0 +1,50 @@
+{
+
+  "3": {
+    "inputs": {
+      "points_string": "0:(1.0)",
+      "invert": false,
+      "frames": 255,
+      "width": 288,
+      "height": 512,
+      "interpolation": "linear"
+    },
+    "class_type": "CreateFadeMaskAdvanced",
+    "_meta": {
+      "title": "Create Fade Mask Advanced"
+    }
+  },
+  "4": {
+    "inputs": {
+      "merge_strategy": "match A",
+      "scale_method": "nearest-exact",
+      "crop": "disabled",
+      "mask_A": [
+        "3",
+        0
+      ],
+      "mask_B": [
+        "5",
+        0
+      ]
+    },
+    "class_type": "VHS_MergeMasks",
+    "_meta": {
+      "title": "Merge Mask Batches 🎥🅥🅗🅢"
+    }
+  },
+  "5": {
+    "inputs": {
+      "points_string": "0:(1.0)",
+      "invert": false,
+      "frames": 48,
+      "width": 288,
+      "height": 512,
+      "interpolation": "linear"
+    },
+    "class_type": "CreateFadeMaskAdvanced",
+    "_meta": {
+      "title": "Create Fade Mask Advanced"
+    }
+  }
+}
