@@ -6,7 +6,7 @@ import json
 import urllib.request
 import urllib.parse
 import os
-import time
+
 
 
 server_address = "127.0.0.1:8188"
@@ -42,7 +42,7 @@ def get_images(ws, prompt):
 
 
 
-def generate_image(prompt,user_name):
+def generate_image(prompt,user_name,timestamp):
 
     script_dir = os.path.dirname(os.path.abspath(__file__))
     workflow_json = os.path.join(script_dir, 'workflow_image.json')
@@ -58,8 +58,7 @@ def generate_image(prompt,user_name):
     comfy_json['8']['inputs']['seed'] = random.randint(1, 999999999999)
     comfy_json['16']['inputs']['seed'] = random.randint(1, 999999999999)
 
-    #timestamp = time.time()
-    comfy_json['31']['inputs']['filename_prefix'] = user_name+"/"+"Comfyui"
+    comfy_json['31']['inputs']['filename_prefix'] = user_name+"/"+str(timestamp)+"/"+"Comfyui"
 
     ws = websocket.WebSocket()
     ws.connect("ws://{}/ws?clientId={}".format(server_address, client_id))
@@ -67,6 +66,6 @@ def generate_image(prompt,user_name):
     return images
 
 
-
-# Be careful, if the prompt is too small a random image will be generated
-#generate_image("a beautiful woman in a fiel, blue moon in a shining sky","test")
+if __name__ == "__main__":
+    # Be careful, if the prompt is too small a random image will be generated
+    generate_image("a beautiful woman in a fiel, blue moon in a shining sky","test")
