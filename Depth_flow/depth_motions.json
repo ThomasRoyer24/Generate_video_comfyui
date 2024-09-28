@@ -1,0 +1,301 @@
+{
+  "5": {
+    "inputs": {
+      "frame_rate": [
+        "31",
+        0
+      ],
+      "loop_count": 0,
+      "filename_prefix": "",
+      "format": "video/h264-mp4",
+      "pix_fmt": "yuv420p",
+      "crf": 11,
+      "save_metadata": false,
+      "pingpong": false,
+      "save_output": true,
+      "images": [
+        "91",
+        0
+      ]
+    },
+    "class_type": "VHS_VideoCombine",
+    "_meta": {
+      "title": "Video Combine 🎥🅥🅗🅢"
+    }
+  },
+  "6": {
+    "inputs": {
+      "method": "intensity",
+      "image": [
+        "85",
+        0
+      ]
+    },
+    "class_type": "Image To Mask",
+    "_meta": {
+      "title": "Image To Mask"
+    }
+  },
+  "7": {
+    "inputs": {
+      "radius": 5,
+      "shape": "circle",
+      "masks": [
+        "6",
+        0
+      ]
+    },
+    "class_type": "DilateErodeMask",
+    "_meta": {
+      "title": "Dilate/Erode Mask"
+    }
+  },
+  "8": {
+    "inputs": {
+      "mask": [
+        "7",
+        0
+      ]
+    },
+    "class_type": "MaskToImage",
+    "_meta": {
+      "title": "Convert Mask to Image"
+    }
+  },
+  "10": {
+    "inputs": {
+      "Number": 100
+    },
+    "class_type": "Int",
+    "_meta": {
+      "title": "Frames"
+    }
+  },
+  "31": {
+    "inputs": {
+      "Number": 30
+    },
+    "class_type": "Float",
+    "_meta": {
+      "title": "Output FPS"
+    }
+  },
+  "50": {
+    "inputs": {
+      "image": "",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    }
+  },
+  "68": {
+    "inputs": {
+      "image": [
+        "199",
+        0
+      ]
+    },
+    "class_type": "Get resolution [Crystools]",
+    "_meta": {
+      "title": "🪛 Get resolution"
+    }
+  },
+  "83": {
+    "inputs": {
+      "upscale_method": "nearest-exact",
+      "scale_by": 0.8,
+      "image": [
+        "199",
+        0
+      ]
+    },
+    "class_type": "ImageScaleBy",
+    "_meta": {
+      "title": "Upscale Image By"
+    }
+  },
+  "85": {
+    "inputs": {
+      "da_model": [
+        "86",
+        0
+      ],
+      "images": [
+        "83",
+        0
+      ]
+    },
+    "class_type": "DepthAnything_V2",
+    "_meta": {
+      "title": "Depth Anything V2"
+    }
+  },
+  "86": {
+    "inputs": {
+      "model": "depth_anything_v2_vits_fp32.safetensors"
+    },
+    "class_type": "DownloadAndLoadDepthAnythingV2Model",
+    "_meta": {
+      "title": "DownloadAndLoadDepthAnythingV2Model"
+    }
+  },
+  "91": {
+    "inputs": {
+      "animation_speed": 1,
+      "input_fps": [
+        "202",
+        0
+      ],
+      "output_fps": [
+        "31",
+        0
+      ],
+      "num_frames": [
+        "201",
+        0
+      ],
+      "motion": [
+        "",
+        0
+      ],
+      "quality": 100,
+      "ssaa": 2,
+      "invert": 0,
+      "tiling_mode": "mirror",
+      "image": [
+        "189",
+        0
+      ],
+      "depth_map": [
+        "8",
+        0
+      ]
+    },
+    "class_type": "Depthflow",
+    "_meta": {
+      "title": "🌊 Depthflow"
+    }
+  },
+  "109": {
+    "inputs": {
+      "value": 2
+    },
+    "class_type": "FloatConstant",
+    "_meta": {
+      "title": "Length of Video (seconds)"
+    }
+  },
+  "110": {
+    "inputs": {
+      "a": [
+        "109",
+        0
+      ],
+      "b": [
+        "111",
+        0
+      ]
+    },
+    "class_type": "JWFloatMul",
+    "_meta": {
+      "title": "Float Multiply"
+    }
+  },
+  "111": {
+    "inputs": {
+      "a": [
+        "10",
+        0
+      ]
+    },
+    "class_type": "CM_IntToFloat",
+    "_meta": {
+      "title": "IntToFloat"
+    }
+  },
+  "112": {
+    "inputs": {
+      "value": [
+        "110",
+        0
+      ],
+      "mode": "round"
+    },
+    "class_type": "JWFloatToInteger",
+    "_meta": {
+      "title": "Float to Integer"
+    }
+  },
+  "189": {
+    "inputs": {
+      "upscale_method": "nearest-exact",
+      "scale_by": 1,
+      "image": [
+        "198",
+        0
+      ]
+    },
+    "class_type": "ImageScaleBy",
+    "_meta": {
+      "title": "Upscale Image By"
+    }
+  },
+  "198": {
+    "inputs": {
+      "any_01": [
+        "50",
+        0
+      ]
+    },
+    "class_type": "Any Switch (rgthree)",
+    "_meta": {
+      "title": "Any Switch (rgthree)"
+    }
+  },
+  "199": {
+    "inputs": {
+      "any_01": [
+        "50",
+        0
+      ]
+    },
+    "class_type": "Any Switch (rgthree)",
+    "_meta": {
+      "title": "Any Switch (rgthree)"
+    }
+  },
+  "201": {
+    "inputs": {
+      "any_01": [
+        "112",
+        0
+      ]
+    },
+    "class_type": "Any Switch (rgthree)",
+    "_meta": {
+      "title": "Any Switch (rgthree)"
+    }
+  },
+  "202": {
+    "inputs": {
+      "any_02": [
+        "203",
+        0
+      ]
+    },
+    "class_type": "Any Switch (rgthree)",
+    "_meta": {
+      "title": "Any Switch (rgthree)"
+    }
+  },
+  "203": {
+    "inputs": {
+      "Number": 100
+    },
+    "class_type": "Float",
+    "_meta": {
+      "title": "Input FPS"
+    }
+  }
