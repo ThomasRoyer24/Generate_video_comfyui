@@ -90,24 +90,12 @@
       "title": "Load Image"
     }
   },
-  "68": {
-    "inputs": {
-      "image": [
-        "199",
-        0
-      ]
-    },
-    "class_type": "Get resolution [Crystools]",
-    "_meta": {
-      "title": "🪛 Get resolution"
-    }
-  },
   "83": {
     "inputs": {
       "upscale_method": "nearest-exact",
       "scale_by": 0.8,
       "image": [
-        "199",
+        "50",
         0
       ]
     },
@@ -134,7 +122,7 @@
   },
   "86": {
     "inputs": {
-      "model": "depth_anything_v2_vits_fp32.safetensors"
+      "model": "depth_anything_v2_vits_fp16.safetensors"
     },
     "class_type": "DownloadAndLoadDepthAnythingV2Model",
     "_meta": {
@@ -145,7 +133,7 @@
     "inputs": {
       "animation_speed": 1,
       "input_fps": [
-        "202",
+        "211",
         0
       ],
       "output_fps": [
@@ -153,11 +141,7 @@
         0
       ],
       "num_frames": [
-        "201",
-        0
-      ],
-      "motion": [
-        "",
+        "112",
         0
       ],
       "quality": 100,
@@ -180,7 +164,7 @@
   },
   "109": {
     "inputs": {
-      "value": 2
+      "value": 8
     },
     "class_type": "FloatConstant",
     "_meta": {
@@ -233,7 +217,7 @@
       "upscale_method": "nearest-exact",
       "scale_by": 1,
       "image": [
-        "198",
+        "50",
         0
       ]
     },
@@ -242,55 +226,7 @@
       "title": "Upscale Image By"
     }
   },
-  "198": {
-    "inputs": {
-      "any_01": [
-        "50",
-        0
-      ]
-    },
-    "class_type": "Any Switch (rgthree)",
-    "_meta": {
-      "title": "Any Switch (rgthree)"
-    }
-  },
-  "199": {
-    "inputs": {
-      "any_01": [
-        "50",
-        0
-      ]
-    },
-    "class_type": "Any Switch (rgthree)",
-    "_meta": {
-      "title": "Any Switch (rgthree)"
-    }
-  },
-  "201": {
-    "inputs": {
-      "any_01": [
-        "112",
-        0
-      ]
-    },
-    "class_type": "Any Switch (rgthree)",
-    "_meta": {
-      "title": "Any Switch (rgthree)"
-    }
-  },
-  "202": {
-    "inputs": {
-      "any_02": [
-        "203",
-        0
-      ]
-    },
-    "class_type": "Any Switch (rgthree)",
-    "_meta": {
-      "title": "Any Switch (rgthree)"
-    }
-  },
-  "203": {
+  "211": {
     "inputs": {
       "Number": 100
     },
