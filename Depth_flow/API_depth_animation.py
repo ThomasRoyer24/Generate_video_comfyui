@@ -8,7 +8,7 @@ import urllib.parse
 import os
 import time
 import math
-from Comfy_node_data import Comfy_node
+from .Comfy_node_data import Comfy_node
 
 server_address = "127.0.0.1:8188"
 client_id = str(uuid.uuid4())
@@ -25,7 +25,6 @@ def queue_prompt(prompt):
 
 def get_video(ws, prompt):
     prompt_id = queue_prompt(prompt)['prompt_id']
-    output_images = {}
     while True:
         out = ws.recv()
         if isinstance(out, str):
@@ -43,7 +42,7 @@ def get_video(ws, prompt):
     return history["outputs"]["5"]["gifs"][0]["filename"] # print history to find the filename
 
 
-def generate_video_depth(image_link,duration,user_name,timestamp,musique_param=False,motion_component_param=False,motion_preset_param=False,effect_param=False,model="depth_anything_v2_vits_fp32.safetensors"):
+def generate_video_depth(image_link,duration,user_name,timestamp,musique_link=False,musique_param=False,motion_component_param=False,motion_preset_param=False,effect_param=False,model="depth_anything_v2_vits_fp32.safetensors"):
 
     #load workflow in text
     script_dir = os.path.dirname(os.path.abspath(__file__)) # Obtient le répertoire actuel du script 
@@ -62,7 +61,7 @@ def generate_video_depth(image_link,duration,user_name,timestamp,musique_param=F
     if effect_param:
         base_json += Comfy_node[effect_param[0][1]]
 
-    if musique_param:
+    if musique_link:
         base_json += Comfy_node["Musique"]        
 
     base_json += "}" # close 
@@ -89,11 +88,15 @@ def generate_video_depth(image_link,duration,user_name,timestamp,musique_param=F
         for param_name, param_value in effect_param:
             comfy_json["3"]["inputs"][param_name] = param_value
     
-    if musique_param:
-        comfy_json["204"]["inputs"]["audio"]= musique_param["musique_link"]
-        comfy_json["204"]["inputs"]["start_time"]= musique_param["start_time"]
+    if musique_link:
+        comfy_json["204"]["inputs"]["audio"]= musique_link
         comfy_json["204"]["inputs"]["duration"]= duration
         comfy_json["207"]["inputs"]["amount"]= duration*30 #30 frames/sec
+
+    if musique_param:
+        for param_name, param_value in musique_param:
+            comfy_json["204"]["inputs"][param_name] = param_value
+
 
 
     #Set connection nodes
@@ -129,6 +132,6 @@ def generate_video_depth(image_link,duration,user_name,timestamp,musique_param=F
 
 if __name__ == "__main__":
 
-    musique ={"musique_link":"audio_cut.MP3","start_time":"10"}
+    musique ={"start_time":"10"}
     effect_param = [("effect","Vignette"),("vignette_intensity","90")]
-    print(generate_video_depth("35393166.png",4,"test","17181381",musique_param=musique,effect_param = effect_param,motion_component_param=[("type","Sine"),("target","Zoom"),("bias","1"),("amplitude","0.3")],motion_preset_param=[("type","Orbital")]))
+    print(generate_video_depth("35393166.png",4,"test","17181381",musique_link="audio_cut.MP3",musique_param=musique,effect_param = effect_param,motion_component_param=[("type","Sine"),("target","Zoom"),("bias","1"),("amplitude","0.3")],motion_preset_param=[("type","Orbital")]))
