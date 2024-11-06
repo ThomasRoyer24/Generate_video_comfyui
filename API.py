@@ -1,6 +1,10 @@
 import os
 from flask import Flask, request, jsonify, send_file
 from Video_outpainting.API_create_image_outpainting_fom_image import generate_image_outpainting
+from Depth_flow.API_depth_animation import generate_video_depth
+
+import json
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -54,6 +58,69 @@ def outpainting():
             
         except Exception as e:
             return jsonify({"error": str(e)}), 500
+        
+@app.route('/depth', methods=['POST'])
+def depth():
+    # Vérifier la présence du fichier image (obligatoire)
+    if 'image' not in request.files:
+        return jsonify({"error": "Image file is missing"}), 400
+    image = request.files['image']
+
+    # Vérifier le fichier image a un nom valide
+    if image.filename == '':
+        return jsonify({"error": "No selected image file"}), 400
+
+    # Récupérer le fichier de musique si présent or False
+    musique = request.files.get('musique') or False
+
+    # Récupérer le paramètre JSON 'data' pour les autres valeurs
+    try:
+        data = json.loads(request.form.get("data"))  # Charger en tant que JSON
+    except (TypeError, json.JSONDecodeError) as e:
+        return jsonify({"error": "Invalid or missing 'data' JSON"}), 400
+
+    # Enregistrer l'image
+    image_filename = generate_unique_filename(image.filename)
+    image_path = os.path.join(app.config['UPLOAD_FOLDER'], image_filename)
+    image.save(image_path)
+
+    # Enregistrer la musique si elle est fournie
+    musique_filename = None
+    if musique and musique.filename != '':
+        musique_filename = generate_unique_filename(musique.filename)
+        musique_path = os.path.join(app.config['UPLOAD_FOLDER'], musique_filename)
+        musique.save(musique_path)
+
+
+    user_name = data["user_name"]
+    duration = data["duration"]
+    musique_param = data.get("musique_param", False)
+    motion_component_param = data.get("motion_component_param", False)
+    motion_preset_param = data.get("motion_preset_param", False)
+    effect_param = data.get("effect_param", False)
+
+    date_str = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0).strftime("%d/%m/%Y")
+
+    output = generate_video_depth(image_link = image_path,duration = duration,user_name = user_name,timestamp = date_str,musique_link=musique_path,musique_param=musique_param,motion_component_param=motion_component_param,motion_preset_param=motion_preset_param,effect_param=effect_param,model="depth_anything_v2_vits_fp32.safetensors")
+
+    output_path = "../output/"+ user_name+"/"+date_str+"/" + output 
+    
+
+    try:
+        return send_file(output_path, as_attachment=True), 200
+        
+        
+        
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
+    
+
+    #linux
+    #curl -X POST http://127.0.0.1:5000/depth \-F "image=@0902.pgn" \-F "musique=@audio_cut.mp3" \-F "data={\"start_time_musique\": \"10\", \"duration\": \"30\", \"user_name\": \"test_user\"}"
+
+    #windows
+    #curl -X POST http://127.0.0.1:5000/depth -F "image=@0902.png" -F "musique=@audio_cut.mp3" -F "data={\"start_time_musique\": \"10\", \"duration\": \"30\", \"user_name\": \"test_user\"}"
