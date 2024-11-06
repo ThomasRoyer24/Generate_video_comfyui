@@ -43,10 +43,10 @@ def get_video(ws, prompt):
     return history["outputs"]["5"]["gifs"][0]["filename"] # print history to find the filename
 
 
-def generate_video(image_link,duration,user_name,timestamp,musique_param=False,motion_component_param=False,motion_preset_param=False,effect=False,effect_param=False,model="depth_anything_v2_vits_fp32.safetensors"):
+def generate_video_depth(image_link,duration,user_name,timestamp,musique_param=False,motion_component_param=False,motion_preset_param=False,effect_param=False,model="depth_anything_v2_vits_fp32.safetensors"):
 
     #load workflow in text
-    script_dir = os.path.dirname(os.path.abspath(__file__))
+    script_dir = os.path.dirname(os.path.abspath(__file__)) # Obtient le répertoire actuel du script 
     workflow_json = os.path.join(script_dir, 'depth_motions.json')
 
     with open(workflow_json, "r+", encoding="utf-8") as fichier:
@@ -59,8 +59,8 @@ def generate_video(image_link,duration,user_name,timestamp,musique_param=False,m
     if motion_preset_param:
         base_json += Comfy_node[motion_preset_param[0][1]] # Pour acceder a la 2 eme valeur du premier tuple 
 
-    if effect:
-        base_json += Comfy_node[effect]
+    if effect_param:
+        base_json += Comfy_node[effect_param[0][1]]
 
     if musique_param:
         base_json += Comfy_node["Musique"]        
@@ -106,7 +106,7 @@ def generate_video(image_link,duration,user_name,timestamp,musique_param=False,m
         else : 
             comfy_json["91"]["inputs"]["motion"] = ["1",0]
         
-    if effect:
+    if effect_param:
         comfy_json["91"]["inputs"]["effects"] = ["3",0]
     
     if musique_param:
@@ -130,5 +130,5 @@ def generate_video(image_link,duration,user_name,timestamp,musique_param=False,m
 if __name__ == "__main__":
 
     musique ={"musique_link":"audio_cut.MP3","start_time":"10"}
-
-    print(generate_video("35393166.png",7,"test","17181381",musique_param=musique,motion_component_param=[("type","Sine"),("target","Zoom"),("bias","1"),("amplitude","0.3")],motion_preset_param=[("type","Orbital")]))
+    effect_param = [("effect","Vignette"),("vignette_intensity","90")]
+    print(generate_video_depth("35393166.png",4,"test","17181381",musique_param=musique,effect_param = effect_param,motion_component_param=[("type","Sine"),("target","Zoom"),("bias","1"),("amplitude","0.3")],motion_preset_param=[("type","Orbital")]))
