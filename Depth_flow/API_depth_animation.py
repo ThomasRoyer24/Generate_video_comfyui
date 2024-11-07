@@ -1,13 +1,10 @@
 from urllib import request, parse
-import random
 import websocket #NOTE: websocket-client (https://github.com/websocket-client/websocket-client)
 import uuid
 import json
 import urllib.request
 import urllib.parse
 import os
-import time
-import math
 from .Comfy_node_data import Comfy_node
 
 server_address = "127.0.0.1:8188"
@@ -91,7 +88,7 @@ def generate_video_depth(image_link,duration,user_name,timestamp,musique_link=Fa
     if musique_link:
         comfy_json["204"]["inputs"]["audio"]= musique_link
         comfy_json["204"]["inputs"]["duration"]= duration
-        comfy_json["207"]["inputs"]["amount"]= duration*30 #30 frames/sec
+        comfy_json["207"]["inputs"]["amount"]= str(int(duration)*30) #30 frames/sec
 
     if musique_param:
         for param_name, param_value in musique_param:
@@ -112,7 +109,7 @@ def generate_video_depth(image_link,duration,user_name,timestamp,musique_link=Fa
     if effect_param:
         comfy_json["91"]["inputs"]["effects"] = ["3",0]
     
-    if musique_param:
+    if musique_link:
         comfy_json["207"]["inputs"]["image"]= ["50",0]
         comfy_json["2"]["inputs"]["feature"] = ["209",0]
         comfy_json["5"]["inputs"]["audio"] = ["204",0]
@@ -132,6 +129,6 @@ def generate_video_depth(image_link,duration,user_name,timestamp,musique_link=Fa
 
 if __name__ == "__main__":
 
-    musique ={"start_time":"10"}
+    musique =[("start_time","10")]
     effect_param = [("effect","Vignette"),("vignette_intensity","90")]
-    print(generate_video_depth("35393166.png",4,"test","17181381",musique_link="audio_cut.MP3",musique_param=musique,effect_param = effect_param,motion_component_param=[("type","Sine"),("target","Zoom"),("bias","1"),("amplitude","0.3")],motion_preset_param=[("type","Orbital")]))
+    print(generate_video_depth("35393166.png",5,"test","17181381",musique_link="audio_cut.MP3",effect_param = effect_param,motion_component_param=[("type","Sine"),("target","Zoom"),("bias","1"),("amplitude","0.3")],motion_preset_param=[("type","Orbital")]))
