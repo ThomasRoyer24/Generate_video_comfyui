@@ -9,7 +9,7 @@ from datetime import datetime
 app = Flask(__name__)
 
 # Dossier où les fichiers seront stockés
-UPLOAD_FOLDER = './input'
+UPLOAD_FOLDER = '../input'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # Vérifie si le dossier existe, sinon le créer
@@ -20,8 +20,18 @@ if not os.path.exists(UPLOAD_FOLDER):
 def generate_unique_filename(filename):
     base, extension = os.path.splitext(filename)
     counter = 1
+    
+    # Vérifie le type de fichier et définit le préfixe en conséquence
+    if extension.lower() in ['.jpg', '.jpeg', '.png']:
+        prefix = "image_"
+    elif extension.lower() in ['.wav', '.mp3']:
+        prefix = "song_"
+    else:
+        raise ValueError(f"L'extension '{extension}' n'est pas prise en charge. Seuls les fichiers images et audio sont autorisés.")
+    
+    # Boucle pour générer un nom de fichier unique
     while True:
-        new_filename = f"image_{counter}{extension}"
+        new_filename = f"{prefix}{counter}{extension}"
         file_path = os.path.join(app.config['UPLOAD_FOLDER'], new_filename)
         if not os.path.exists(file_path):
             return new_filename
@@ -99,7 +109,7 @@ def depth():
     motion_preset_param = data.get("motion_preset_param", False)
     effect_param = data.get("effect_param", False)
 
-    date_str = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0).strftime("%d/%m/%Y")
+    date_str = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0).strftime("%d-%m-%Y")
 
     output = generate_video_depth(image_link = image_path,duration = duration,user_name = user_name,timestamp = date_str,musique_link=musique_path,musique_param=musique_param,motion_component_param=motion_component_param,motion_preset_param=motion_preset_param,effect_param=effect_param,model="depth_anything_v2_vits_fp32.safetensors")
 
@@ -115,12 +125,14 @@ def depth():
         return jsonify({"error": str(e)}), 500
 
 
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
-    
 
     #linux
     #curl -X POST http://127.0.0.1:5000/depth \-F "image=@0902.pgn" \-F "musique=@audio_cut.mp3" \-F "data={\"start_time_musique\": \"10\", \"duration\": \"30\", \"user_name\": \"test_user\"}"
 
     #windows
-    #curl -X POST http://127.0.0.1:5000/depth -F "image=@0902.png" -F "musique=@audio_cut.mp3" -F "data={\"start_time_musique\": \"10\", \"duration\": \"30\", \"user_name\": \"test_user\"}"
+    #curl -X POST http://127.0.0.1:5000/depth -F "image=@0902.png" -F "musique=@audio_cut.mp3" -F "data={\"user_name\": \"thomas\", \"duration\": \"5\", \"motion_component_param\": [[\"type\", \"Sine\"], [\"target\", \"Zoom\"], [\"bias\", \"1\"], [\"amplitude\", \"0.3\"]], \"motion_preset_param\": [[\"type\", \"Orbital\"]]}"
+
+
