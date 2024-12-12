@@ -129,7 +129,7 @@ def depth():
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
 
-    #linux
+    #linux test
     #curl -X POST http://127.0.0.1:5000/depth \-F "image=@0902.pgn" \-F "musique=@audio_cut.mp3" \-F "data={\"start_time_musique\": \"10\", \"duration\": \"30\", \"user_name\": \"test_user\"}"
 
     #windows
