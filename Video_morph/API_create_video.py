@@ -8,9 +8,11 @@ import urllib.parse
 import os
 import time
 import math
+from dotenv import dotenv_values
 
+config = dotenv_values(".env")
+server_address = config['SERVER_ADDRESS']
 
-server_address = "127.0.0.1:8188"
 client_id = str(uuid.uuid4())
 
 def get_history(prompt_id):
@@ -64,6 +66,7 @@ def generate_video(image_link,user_name,time_interval_img,timestamp):
         base_json += ',"{}":'.format(i)
         base_json += ' {"inputs": {"weight": 1,"weight_type": "ease in-out","start_at": 0,"end_at": 1,"embeds_scaling": "V only","encode_batch_size": 0,"model": ["573",0],"ipadapter": ["573",1],"image": ["'+str(i+20)+'",0],"attn_mask": ["713",0]},"class_type": "IPAdapterBatch","_meta": {"title": "IPAdapter Batch (Adv.)"}}'
         
+        """
         #if there is more than 255 frame, merge multiple mask
         for j in range(1,nb_fade_mask):
             #Mask
@@ -78,7 +81,8 @@ def generate_video(image_link,user_name,time_interval_img,timestamp):
                 if j > 2:
                     base_json += ',"{}":'.format(3000+i*100+ j)
                     base_json +=  '{ "inputs": {"merge_strategy": "match A","scale_method": "nearest-exact","crop": "disabled","mask_A": ["'+str(3000+i*100+ j -1)+'",0],"mask_B": ["'+str(600+i*10+ j)+'",0] },    "class_type": "VHS_MergeMasks",    "_meta": {      "title": "Merge Mask Batches "    }  }'
-
+        """
+        
 
         #Load image
         base_json += ',"{}":'.format(i + 20)
@@ -91,7 +95,7 @@ def generate_video(image_link,user_name,time_interval_img,timestamp):
 
     for i, link in enumerate(image_link):
         #Load image
-        comfy_json[str(20+i)]['inputs']['image'] = "D:/ComfyUi/ComfyUI_windows_portable/ComfyUI/output/"+user_name+"/"+str(timestamp)+"/"+link
+        comfy_json[str(20+i)]['inputs']['image'] = user_name+"/"+str(timestamp)+"/"+link
        
         #Create Mask
         comfy_json[str(10+i)]['inputs']['frames'] = total_frame #12 frame/sec
@@ -148,4 +152,4 @@ def generate_video(image_link,user_name,time_interval_img,timestamp):
 
 if __name__ == "__main__":
 
-    #generate_video(["ComfyUI_00001_.png","ComfyUI_00002_.png"],"test",2,"1717745319.5879269")
+    generate_video(["ComfyUI_00001_.png","ComfyUI_00002_.png"],"test",2,"1718138189.213908")

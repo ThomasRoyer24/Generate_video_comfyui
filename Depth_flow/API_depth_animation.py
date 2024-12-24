@@ -5,9 +5,12 @@ import json
 import urllib.request
 import urllib.parse
 import os
-from .Comfy_node_data import Comfy_node
+from .Comfy_node_data import Comfy_node # Delete the point . for test unitaire
+from dotenv import dotenv_values
 
-server_address = "127.0.0.1:8188"
+config = dotenv_values(".env")
+server_address = config['SERVER_ADDRESS']
+
 client_id = str(uuid.uuid4())
 
 def get_history(prompt_id):

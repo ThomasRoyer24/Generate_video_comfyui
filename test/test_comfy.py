@@ -6,10 +6,11 @@ import json
 import urllib.request
 import urllib.parse
 import os
+from dotenv import dotenv_values
 
+config = dotenv_values(".env")
+server_address = config['SERVER_ADDRESS']
 
-
-server_address = "127.0.0.1:8188"
 client_id = str(uuid.uuid4())
 
 def get_history(prompt_id):
@@ -42,10 +43,10 @@ def get_images(ws, prompt):
 
 
 
-def generate_image(image,user_name,timestamp):
+def generate_image(image,user_name):
 
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    workflow_json = os.path.join(script_dir, 'test_image.json')
+    workflow_json = os.path.join(script_dir, 'test_comfyui.json')
 
     with open(workflow_json, "r", encoding="utf-8") as fichier:
         comfy_json = json.load(fichier)
@@ -53,7 +54,7 @@ def generate_image(image,user_name,timestamp):
 
 
     comfy_json['1']['inputs']['image'] = image
-    comfy_json['5']['inputs']['filename_prefix'] = user_name+"/"+str(timestamp)+"/"+"Comfyui"
+    comfy_json['5']['inputs']['filename_prefix'] = user_name+"/"+"Comfyui"
 
     ws = websocket.WebSocket()
     ws.connect("ws://{}/ws?clientId={}".format(server_address, client_id))
