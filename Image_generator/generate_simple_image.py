@@ -14,6 +14,8 @@ comfyui_port = os.getenv("COMFYUI_PORT")
 
 server_address = comfyui_host + ":" + comfyui_port
 
+# server_address = "127.0.0.1:8188"
+
 client_id = str(uuid.uuid4())
 
 def get_history(prompt_id):
@@ -67,9 +69,9 @@ def generate_image(prompt,user_name):
     ws = websocket.WebSocket()
     ws.connect("ws://{}/ws?clientId={}".format(server_address, client_id))
     images = get_images(ws, comfy_json)
-    return images
+    return  "/database/"+user_name+"/"+images
 
 
 if __name__ == "__main__":
     # Be careful, if the prompt is too small a random image will be generated
-    generate_image("a beautiful woman in a fiel, blue moon in a shining sky","test")
+    print(generate_image("a beautiful woman in a fiel, blue moon in a shining sky","test"))
