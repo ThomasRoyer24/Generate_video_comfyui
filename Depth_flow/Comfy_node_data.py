@@ -356,15 +356,5 @@ Comfy_node = {
     "_meta": {
       "title": "FeatureMod Smoothing | RyanOnTheInside"
     }
-  },
-  "210": {
-    "inputs": {
-      "image": "35393166.png",
-      "upload": "image"
-    },
-    "class_type": "LoadImage",
-    "_meta": {
-      "title": "Load Image"
-    }
   }'''
 }
