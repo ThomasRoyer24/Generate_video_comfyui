@@ -5,7 +5,7 @@ import json
 import urllib.request
 import urllib.parse
 import os
-from .Comfy_node_data import Comfy_node # Delete the point . for test unitaire
+from Comfy_node_data import Comfy_node # Delete the point . for test unitaire
 from dotenv import dotenv_values
 
 config = dotenv_values(".env")
@@ -42,7 +42,7 @@ def get_video(ws, prompt):
     return history["outputs"]["5"]["gifs"][0]["filename"] # print history to find the filename
 
 
-def generate_video_depth(image_link,duration,user_name,timestamp,musique_link=False,musique_param=False,motion_component_param=False,motion_preset_param=False,effect_param=False,model="depth_anything_v2_vits_fp32.safetensors"):
+def generate_video_depth(image_link,duration,user_name,musique_link=False,musique_param=False,motion_component_param=False,motion_preset_param=False,effect_param=False,model="depth_anything_v2_vits_fp32.safetensors"):
 
     #load workflow in text
     script_dir = os.path.dirname(os.path.abspath(__file__)) # Obtient le répertoire actuel du script 
@@ -119,14 +119,14 @@ def generate_video_depth(image_link,duration,user_name,timestamp,musique_link=Fa
 
 
     #Set output node
-    comfy_json["5"]["inputs"]["filename_prefix"] = user_name+"/"+str(timestamp)+"/"+"Video"
+    comfy_json["5"]["inputs"]["filename_prefix"] = user_name+"/Video"
 
     ws = websocket.WebSocket()
     ws.connect("ws://{}/ws?clientId={}".format(server_address, client_id))
     video_link = get_video(ws, comfy_json)
 
     
-    return video_link
+    return "/database/"+user_name+"/"+video_link
 
 
 
@@ -134,4 +134,4 @@ if __name__ == "__main__":
 
     musique =[("start_time","10")]
     effect_param = [("effect","Vignette"),("vignette_intensity","90")]
-    print(generate_video_depth("35393166.png",5,"test","17181381",musique_link="audio_cut.MP3",effect_param = effect_param,motion_component_param=[("type","Sine"),("target","Zoom"),("bias","1"),("amplitude","0.3")],motion_preset_param=[("type","Orbital")]))
+    print(generate_video_depth("35393166.png",5,"test",musique_link="audio_cut.MP3",effect_param = effect_param,motion_component_param=[("type","Sine"),("target","Zoom"),("bias","1"),("amplitude","0.3")],motion_preset_param=[("type","Orbital")]))
