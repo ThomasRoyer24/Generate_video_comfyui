@@ -6,11 +6,11 @@ import urllib.request
 import urllib.parse
 import os
 from Comfy_node_data import Comfy_node # Delete the point . for test unitaire
-from dotenv import dotenv_values
+# comfyui_host = os.getenv("COMFYUI_HOST")
+# comfyui_port = os.getenv("COMFYUI_PORT")
 
-config = dotenv_values(".env")
-server_address = config['SERVER_ADDRESS']
-
+# server_address = comfyui_host + ":" + comfyui_port
+server_address = "127.0.0.1:8188"
 client_id = str(uuid.uuid4())
 
 def get_history(prompt_id):
@@ -91,7 +91,7 @@ def generate_video_depth(image_link,duration,user_name,musique_link=False,musiqu
     if musique_link:
         comfy_json["204"]["inputs"]["audio"]= musique_link
         comfy_json["204"]["inputs"]["duration"]= duration
-        comfy_json["207"]["inputs"]["amount"]= str(int(duration)*30) #30 frames/sec
+        comfy_json["207"]["inputs"]["amount"]= str(float(duration)*30) #30 frames/sec
 
     if musique_param:
         for param_name, param_value in musique_param:
