@@ -290,13 +290,9 @@ Comfy_node = {
       "audio": [
         "204",
         0
-      ],
-      "video_frames": [
-        "207",
-        0
       ]
     },
-    "class_type": "AudioSeparator",
+    "class_type": "AudioSeparatorSimple",
     "_meta": {
       "title": "Audio Separator | RyanOnTheInside"
     }
@@ -326,13 +322,13 @@ Comfy_node = {
   "208": {
     "inputs": {
       "extraction_method": "amplitude_envelope",
+      "frame_rate": 30,
+      "frame_count": 0,
+      "width": 512,
+      "height": 512,
       "audio": [
         "205",
         1
-      ],
-      "feature_pipe": [
-        "205",
-        5
       ]
     },
     "class_type": "AudioFeatureExtractor",
@@ -342,13 +338,28 @@ Comfy_node = {
   },
   "209": {
     "inputs": {
+      "lower_threshold": 0.3,
+      "upper_threshold": 1,
+      "invert_output": false,
+       "feature": [
+        "208",
+        0
+      ]
+    },
+    "class_type": "FeatureRebase",
+    "_meta": {
+      "title": "Feature Rebase ⚡🅡🅞🅣🅘"
+    }
+  },
+  "210": {
+    "inputs": {
       "smoothing_type": "moving_average",
       "window_size": 5,
       "alpha": 0.3,
       "sigma": 1,
       "invert_output": false,
       "feature": [
-        "208",
+        "209",
         0
       ]
     },

@@ -91,7 +91,7 @@ def generate_video_depth(image_link,duration,user_name,musique_link=False,musiqu
     if musique_link:
         comfy_json["204"]["inputs"]["audio"]= musique_link
         comfy_json["204"]["inputs"]["duration"]= duration
-        comfy_json["207"]["inputs"]["amount"]= str(float(duration)*30) #30 frames/sec
+        comfy_json["207"]["inputs"]["amount"]= int(duration)*30 #30 frames/sec
 
     if musique_param:
         for param_name, param_value in musique_param:
@@ -114,7 +114,7 @@ def generate_video_depth(image_link,duration,user_name,musique_link=False,musiqu
     
     if musique_link:
         comfy_json["207"]["inputs"]["image"]= ["50",0]
-        comfy_json["2"]["inputs"]["feature"] = ["209",0]
+        comfy_json["2"]["inputs"]["feature"] = ["210",0]
         comfy_json["5"]["inputs"]["audio"] = ["204",0]
 
 
@@ -126,12 +126,12 @@ def generate_video_depth(image_link,duration,user_name,musique_link=False,musiqu
     video_link = get_video(ws, comfy_json)
 
     
-    return "/database/"+user_name+"/"+video_link
+    return "/database/"+user_name+"/"+video_link 
 
 
 
 if __name__ == "__main__":
 
-    musique =[("start_time","10")]
+    musique =[("start_time","9")]
     effect_param = [("effect","Vignette"),("vignette_intensity","90")]
     print(generate_video_depth("35393166.png",5,"test",musique_link="audio_cut.MP3",effect_param = effect_param,motion_component_param=[("type","Sine"),("target","Zoom"),("bias","1"),("amplitude","0.3")],motion_preset_param=[("type","Orbital")]))
