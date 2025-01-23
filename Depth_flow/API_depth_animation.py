@@ -5,12 +5,13 @@ import json
 import urllib.request
 import urllib.parse
 import os
-from Comfy_node_data import Comfy_node # Delete the point . for test unitaire
-# comfyui_host = os.getenv("COMFYUI_HOST")
-# comfyui_port = os.getenv("COMFYUI_PORT")
+from .Comfy_node_data import Comfy_node # Delete the point . for test unitaire
 
-# server_address = comfyui_host + ":" + comfyui_port
-server_address = "127.0.0.1:8188"
+comfyui_host = os.getenv("COMFYUI_HOST")
+comfyui_port = os.getenv("COMFYUI_PORT")
+
+server_address = comfyui_host + ":" + comfyui_port
+
 client_id = str(uuid.uuid4())
 
 def get_history(prompt_id):
