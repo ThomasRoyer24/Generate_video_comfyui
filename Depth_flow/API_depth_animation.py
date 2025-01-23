@@ -91,7 +91,7 @@ def generate_video_depth(image_link,duration,user_name,musique_link=False,musiqu
     if musique_link:
         comfy_json["204"]["inputs"]["audio"]= musique_link
         comfy_json["204"]["inputs"]["duration"]= duration
-        comfy_json["207"]["inputs"]["amount"]= int(duration)*30 #30 frames/sec
+        comfy_json["207"]["inputs"]["amount"]= int(float(duration)*30) #30 frames/sec
 
     if musique_param:
         for param_name, param_value in musique_param:
