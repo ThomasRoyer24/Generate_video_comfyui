@@ -75,34 +75,6 @@
       "title": "CLIP Text Encode (Prompt)"
     }
   },
-  "8": {
-    "inputs": {
-      "samples": [
-        "3",
-        0
-      ],
-      "vae": [
-        "4",
-        2
-      ]
-    },
-    "class_type": "VAEDecode",
-    "_meta": {
-      "title": "VAE Decode"
-    }
-  },
-  "10": {
-    "inputs": {
-      "images": [
-        "8",
-        0
-      ]
-    },
-    "class_type": "PreviewImage",
-    "_meta": {
-      "title": "Preview Image"
-    }
-  },
   "11": {
     "inputs": {
       "upscale_method": "bislerp",
@@ -120,7 +92,7 @@
   "12": {
     "inputs": {
       "seed": 646292305673833,
-      "steps": 30,
+      "steps": 10,
       "cfg": 2,
       "sampler_name": "dpmpp_2m",
       "scheduler": "normal",
